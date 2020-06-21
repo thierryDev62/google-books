@@ -2,22 +2,25 @@
 <html lang="fr">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Recherche de livres eBook sur Google Book avec Vue.js et Axios">
+	<link rel="shortcut icon" type="image/ico" href="favicon.ico"/>
 	<link rel="stylesheet" href="libs/css/bootstrap.min.css">
 	<link rel="stylesheet" href="libs/css/style.css"/>
-	<title>Recherche de livres dans la bibliothèque Google Book - Vue.js, Axios</title>
+	<title>Recherche de livres eBook sur Google Book - Vue.js, Axios</title>
 </head>
-<body class="bg-dark">
+<body>
 <div id="app">
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row justify-content-center mb-3">
-			<h1 class="text-white">Recherche de livres dans la bibliothèque Google Book</h1>
+			<h1 class="text-white mb-3">Recherche de livres eBook sur Google Book - Vue.js, Axios</h1>
 		</div>
 		<div class="row mb-3 text-center justify-content-center">
-			<div id="search" class="col-6 bg-light border border-secondary rounded-lg shadow-lg">
-				<form id="myform" @submit.prevent="submit">
+			<div class="col-6 bg-light border border-secondary rounded-lg shadow-lg">
+				<form @submit.prevent="submit">
 					<div class="form-group">
-						<label class="mt-2 h4" for="rech">Saisir un terme</label>
-						<input id="rech" type="text" class="form-control" v-model="books">
+						<label class="mt-2 h4" for="search">Saisir un terme</label>
+						<input id="search" type="text" class="form-control" v-model="books">
 						<br>
 						<button class="btn btn-success">rechercher</button>
 					</div>
@@ -30,24 +33,30 @@
 				<th scope="col">Titre</th>
 				<th scope="col">Auteur</th>
 				<th scope="col">Image</th>
-				<th scope="col">Résumé</th>
+				<th scope="col">Description</th>
+				<th scope="col">Langage</th>
+				<th scope="col">Prix</th>
 			</tr>
 			</thead>
 			<tbody>
-			<tr v-for="result in results">
+			<tr v-for="result in results" :key="result.items">
 				<td>{{ result.volumeInfo.title }}</td>
 				<td v-if="result.volumeInfo.authors">{{ result.volumeInfo.authors[0] }}</td>
 				<td v-else>Auteur inconnu</td>
-				<td v-if="result.volumeInfo.imageLinks"><img class="img-thumbnail" :src="result.volumeInfo.imageLinks.thumbnail"></td>
+				<td v-if="result.volumeInfo.imageLinks"><img :src="result.volumeInfo.imageLinks.thumbnail" :alt="result.volumeInfo.title" :title="result.volumeInfo.title"></td>
 				<td v-else><img src="libs/images/content.png"></td>
-				<td v-if="result.searchInfo" v-html="result.searchInfo.textSnippet"></td>
-				<td v-else>Pas de résumé</td>
+				<td v-if="result.volumeInfo.description">{{ result.volumeInfo.description }}</td>
+				<td v-else>Pas de description</td>
+				<td v-if="result.volumeInfo.language">{{ result.volumeInfo.language }}</td>
+				<td v-else>Pas défini</td>
+				<td v-if="result.saleInfo.listPrice">{{ result.saleInfo.listPrice.amount }}€</td>
+				<td v-else>Pas défini</td>
 			</tr>
 			</tbody>
 		</table>
 	</div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="libs/js/vue.js"></script>
 <script src="libs/js/axios.min.js"></script>
 <script src="libs/js/vueApp.js"></script>
 
