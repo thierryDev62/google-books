@@ -22,16 +22,15 @@
 				<form @submit.prevent="submit">
 					<div class="form-group">
 						<label class="mt-2 h4" for="search">
-							Saisir un terme
+							Saisir un terme (titre, auteur, ...)
 						</label>
 						<input id="search" type="text" class="form-control" v-model="books">
 						<br>
 						<button class="btn btn-warning">
-							rechercher
+							rechercher un livre
 						</button>
 					</div>
 				</form>
-
 				<div v-if="results === undefined" class="alert-danger text-white p-3 mb-3 font-weight-bold">
 					Rien trouvé désolé avec le terme '{{ books }}'
 				</div>
@@ -86,7 +85,7 @@
 					{{ result.volumeInfo.description }}
 				</td>
 				<td v-else>
-					Pas de description
+					Pas de description pour ce livre
 				</td>
 				<td v-if="result.volumeInfo.language">
 					{{ result.volumeInfo.language }}
