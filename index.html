@@ -19,18 +19,17 @@
 		</div>
 		<div class="row mb-3 text-center justify-content-center">
 			<div class="col-6 bg-light border border-secondary rounded-lg shadow-lg">
-				<form @submit.prevent="submit">
+				<<form @submit.prevent="submit">
 					<div class="form-group">
 						<label class="mt-2 h4" for="search">
 							Saisir un terme (titre, auteur, ...)
 						</label>
 						<input id="search" type="text" class="form-control" v-model="books">
 						<br>
-						<button class="btn btn-warning">
-							rechercher un livre
-						</button>
+						<search-button></search-button>
 					</div>
 				</form>
+
 				<div v-if="results === undefined" class="alert-danger text-white p-3 mb-3 font-weight-bold">
 					Rien trouvé désolé avec le terme '{{ books }}'
 				</div>

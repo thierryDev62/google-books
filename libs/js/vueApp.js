@@ -16,6 +16,13 @@ new Vue({
             }
         }
     },
+    components: {
+        'search-button' : {
+            template: `<button class="btn btn-warning">
+                        rechercher un livre
+                        </button>`
+        }
+    }
 })
 
 
