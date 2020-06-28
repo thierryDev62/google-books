@@ -51,14 +51,27 @@
 					Image
 				</th>
 				<th scope="col">
-					Description
+					Editeur
+				</th>
+				<th scope="col">
+					Année de parution
+				</th>
+				<th scope="col">
+					Genre
 				</th>
 				<th scope="col">
 					Langage
 				</th>
 				<th scope="col">
-					Prix
+					Nbr pages
 				</th>
+				<th scope="col">
+					ISBN-10
+				</th>
+				<th scope="col">
+					ISBN-13
+				</th>
+
 			</tr>
 			</thead>
 			<tbody>
@@ -80,24 +93,53 @@
 				<td v-else>
 					<img src="libs/images/content.png">
 				</td>
-				<td v-if="result.volumeInfo.description">
-					{{ result.volumeInfo.description }}
+				<td v-if="result.volumeInfo.publisher">
+					{{ result.volumeInfo.publisher }}
 				</td>
 				<td v-else>
-					Pas de description pour ce livre
+					Editeur inconnu
 				</td>
+				<td v-if="result.volumeInfo.categories">
+					{{ result.volumeInfo.categories[0] }}
+				</td>
+				<td v-else>
+					Genre inconnu
+				</td>
+
+				<td v-if="result.volumeInfo.publishedDate">
+					{{ result.volumeInfo.publishedDate }}
+				</td>
+				<td v-else>
+					Date de parution inconnue
+				</td>
+
 				<td v-if="result.volumeInfo.language">
 					{{ result.volumeInfo.language }}
 				</td>
 				<td v-else>
 					Pas défini
 				</td>
-				<td v-if="result.saleInfo.listPrice">
-					{{ result.saleInfo.listPrice.amount }}€
+				<td v-if="result.volumeInfo.pageCount">
+					{{ result.volumeInfo.pageCount }}
 				</td>
 				<td v-else>
-					Pas défini
+					nombre de pages inconnu
 				</td>
+
+				<td v-if="result.volumeInfo.industryIdentifiers[0]">
+					{{ result.volumeInfo.industryIdentifiers[0].identifier }}
+				</td>
+				<td v-else>
+					ISBN-10 inconnu
+				</td>
+
+				<td v-if="result.volumeInfo.industryIdentifiers[1]">
+					{{ result.volumeInfo.industryIdentifiers[1].identifier }}
+				</td>
+				<td v-else>
+					ISBN-13 inconnu
+				</td>
+
 			</tr>
 			</tbody>
 		</table>
