@@ -66,9 +66,6 @@
 					Nbr pages
 				</th>
 				<th scope="col">
-					ISBN-10
-				</th>
-				<th scope="col">
 					ISBN-13
 				</th>
 
@@ -126,15 +123,9 @@
 					nombre de pages inconnu
 				</td>
 
-				<td v-if="result.volumeInfo.industryIdentifiers[0]">
-					{{ result.volumeInfo.industryIdentifiers[0].identifier }}
-				</td>
-				<td v-else>
-					ISBN-10 inconnu
-				</td>
-
-				<td v-if="result.volumeInfo.industryIdentifiers[1]">
-					{{ result.volumeInfo.industryIdentifiers[1].identifier }}
+				<td v-if="result.volumeInfo.industryIdentifiers && result.volumeInfo.industryIdentifiers[1] && result.volumeInfo.industryIdentifiers[0]">
+					{{ result.volumeInfo.industryIdentifiers[0].type }} :<br> {{ result.volumeInfo.industryIdentifiers[0].identifier }}<br>
+					{{ result.volumeInfo.industryIdentifiers[1].type }} :<br> {{ result.volumeInfo.industryIdentifiers[1].identifier }}
 				</td>
 				<td v-else>
 					ISBN-13 inconnu
